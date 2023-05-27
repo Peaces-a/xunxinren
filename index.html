@@ -1,124 +1,38 @@
-<!doctype html>
-<html lang="zh" class="no-js">
+<!DOCTYPE html>
+<html lang="zh-cmn-hans">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-  <title>寻心人·寻新人</title>
-  <meta name="Description" content="寻心人，还是寻新人。Seeking a heart, or looking for a newcomer.">
-  <meta name="color-scheme" content="dark light">
-  <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
-  <link rel="stylesheet" type="text/css" href="assets/css/main.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1">
+    <title>寻心人</title>
+    <meta name="keywords" content="寻心人,寻新人,xunxinren,peace,peacehome,tiaq,xunxinren.com,tiaq.cn">
+    <meta name="description" content="锦瑟无端五十弦，一弦一柱思华年。庄生晓梦迷蝴蝶，望帝春心托杜鹃。沧海月明珠有泪，蓝田日暖玉生烟。此情可待成追忆，只是当时已惘然。">
+    <link rel="shortcut icon" href="/favicon.ico" type=image/x-icon>
+    <link href="./jian.css" rel="stylesheet">
+    <style type="text/css">
+        a {color:#ffc1cc}
+        h1,h2,h3 {font-weight:lighter}
+        body {color:#fff;float:right;padding:1.5em;background:url(https://alist-tuku.oss-cn-beijing.aliyuncs.com/tuchuang/blog-p/wallpaper/strotwebp.webp) center center/cover fixed no-repeat;}
+        header {text-align:right;margin-bottom:1em;}
+        header h1 {padding:1rem;display:inline-block;background:rgba(250,250,250,0.3);}
+        main {padding:1.5em;max-width:400px;margin-bottom:2em;background:rgba(250,250,250,0.3);}
+        @media screen and (min-width:1024px) {main {max-width:600px}}
+        main h2 {position:relative}
+        main h2:before {content:'';height:100%;width:.5rem;left:-1.5rem;background:#ffc1cc;position:absolute;}
+        footer {padding:1em 0;text-align:center;background:rgba(250,250,250,0.3);}
+    </style> 
 </head>
-
 <body>
-  <div class="vi">
-    <h1 class="animate-slide-in-down">寻心人</h1>
-    <div class="quote">
-      <span class="quote-line quote-line-start animate-slide-in-left"></span>
-      <span class="quote-icon quote-icon-start animate-slide-in-down">
-        <i class="icon icon-quotes-left"></i>
-      </span>
-      <p class="quote-content animate-slide-in-down">你是在寻找你心上人呢，还是在寻找新人呢？</p>
-      <p class="quote-author animate-slide-in-down">《寻》—— <em>Peace</em></p>
-      <span class="quote-icon quote-icon-end animate-slide-in-up">
-        <i class="icon icon-quotes-right"></i>
-      </span>
-      <span class="quote-line quote-line-end animate-slide-in-right"></span>
-    </div>
-    <div class="links">
-      <a href="https://tiaq.cn" class="animate-slide-in-down">Blog</a>
-    </div>
-    <div class="location">
-      <span class="location-icon animate-slide-in-up">
-        <i class="icon icon-map-pin"></i>
-      </span>
-      <span class="location-text animate-slide-in-down">Tianqi || Peace - Beijing</span>
-    </div>
-    <div class="relocating">
-      Navigating to: <span class="relocate-location"></span>...
-    </div>
-  </div>
-
-  <script src="assets/vendors/jquery-3.3.1.min.js"></script>
-  <script>
-    $(function () {
-      var SLIDE_IN_DOWN = { opacity: 1, top: 0 };
-      var SLIDE_IN_UP = { opacity: 1, bottom: 0 };
-      var SLIDE_IN_LEFT = { left: 0 };
-      var SLIDE_IN_RIGHT = { right: 0 };
-
-      registerCheatCode();
-      executeAnimations();
-
-      function executeAnimations() {
-        $.when()
-          .then(animateTitle)
-          .then(animateQuote)
-          .then(animateLinks)
-          .then(animateLocation);
-      }
-
-      function animateTitle() {
-        return animate('h1', SLIDE_IN_DOWN);
-      }
-
-      function animateQuote() {
-        return $.when(
-          animate('.quote-line-start', SLIDE_IN_LEFT),
-          animate('.quote-line-end',SLIDE_IN_RIGHT),
-          animate('.quote-icon-start', SLIDE_IN_DOWN),
-          animate('.quote-icon-end', SLIDE_IN_UP)
-        )
-          .then(function () {
-            return animate('.quote-content', SLIDE_IN_DOWN);
-          })
-          .then(function () {
-            return animate('.quote-author', SLIDE_IN_DOWN);
-          });
-      }
-
-      function animateLinks() {
-        var DELAY_STEP = 200;
-        var elements = $('.links a');
-        var concurrent = $.makeArray(elements)
-          .map(function (element, index) {
-            return animate(element, SLIDE_IN_DOWN, index * DELAY_STEP);
-          });
-
-        return $.when.apply($, concurrent);
-      }
-
-      function animateLocation() {
-        return $.when(
-          animate('.location-icon', SLIDE_IN_UP),
-          animate('.location-text', SLIDE_IN_DOWN)
-        );
-      }
-
-      function animate(selector, properties, delay, options) {
-        delay = delay || 0;
-        return $(selector).delay(delay)
-          .animate(properties, options)
-          .promise();
-      }
-
-      function registerCheatCode() {
-        $(document.body).on('keydown', function (event) {
-          var KEY_B = 66;
-
-          if (event.which === KEY_B) {
-            $('.relocate-location').text('Bookmark Page');
-            $('.relocating').css('opacity', 1);
-
-            window.setTimeout(function () {
-              window.location.href = '/bookmarks.html';
-            }, 1000);
-          }
-        });
-      }
-    });
-  </script>
-</body>
-</html>
+<header><h1>『 寻心人 』</h1></header>
+<main>
+    <h2>暂为一首诗</h2>
+    <p>人在未见之时，我亦独行在这世上，料峭，春醒，酷暑，骤雨，寒意四起，大雁南飞，</p>
+    <p>而后，大雪，寒风， 斗转星移，人间寒暑，如此之后， 才得蓦然回首，四目相对。</p>
+    <p>终有相见之时，你亦不再孤行于世，春芽，夏涤，秋篱，冬绒，相思四季，待雁北归，</p>
+    <p>你我，相遇，缘起 星辰月笠，春秋旖旎 自此以后，才可白头相许，永不分离。</p>
+    <img src="https://alist-tuku.oss-cn-beijing.aliyuncs.com/tuchuang/blog-p/zaxiang/shiju.png">
+</main>
+<footer>
+    <p>© 2023 <a href="https://ssnur.com/">Peace || Tianqi</a> & <a href="https://tiaq.cn/" target="_blank">Peace || tianqi bolg</a></p>
+    <p>曇花一現，令人生厭</p>
+</footer>
+</body></html>
